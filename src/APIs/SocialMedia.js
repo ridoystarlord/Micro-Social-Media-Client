@@ -105,6 +105,7 @@ const registerNewUser = async (currentData) => {
     console.log(response?.data);
     return [true, response?.data];
   } catch (error) {
+    console.log(error?.response);
     return [false, error?.response?.data];
   }
 };
@@ -120,7 +121,7 @@ const loginUser = async (currentData) => {
     });
     return [true, response?.data];
   } catch (error) {
-    return [false, error?.response?.data];
+    return [false, error?.response?.data?.message];
   }
 };
 

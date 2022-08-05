@@ -71,12 +71,31 @@ const Navbar = ({ open, setOpen }) => {
                                 >
                                     <MenuIcon />
                                 </IconButton>
-                                <Button
-                                    onClick={logout}
-                                    sx={{ my: 2, color: 'white', display: 'block', textTransform: "initial" }}
+                                <Menu
+                                    id="menu-appbar"
+                                    anchorEl={anchorElNav}
+                                    anchorOrigin={{
+                                        vertical: 'bottom',
+                                        horizontal: 'left',
+                                    }}
+                                    keepMounted
+                                    transformOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'left',
+                                    }}
+                                    open={Boolean(anchorElNav)}
+                                    onClose={handleCloseNavMenu}
+                                    sx={{
+                                        display: { xs: 'block', md: 'none' },
+                                        textTransform: "initial"
+                                    }}
                                 >
-                                    Logout
-                                </Button>
+                                    <MenuItem onClick={logout}>
+                                        <Typography textAlign="center">Logout</Typography>
+                                    </MenuItem>
+
+                                </Menu>
+
                             </Box> : <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                                 <IconButton
                                     size="large"
@@ -107,27 +126,36 @@ const Navbar = ({ open, setOpen }) => {
                                         textTransform: "initial"
                                     }}
                                 >
-                                    <MenuItem onClick={handleCloseNavMenu}>
-                                        <Typography textAlign="center">Register</Typography>
-                                    </MenuItem>
+                                    <Link to="/" style={{ textDecoration: "none", color: 'inherit' }}>
+                                        <MenuItem onClick={handleCloseNavMenu}>
+                                            <Typography textAlign="center">Login</Typography>
+                                        </MenuItem>
+                                    </Link>
+                                    <Link to="/register" style={{ textDecoration: "none", color: 'inherit' }}>
+                                        <MenuItem onClick={handleCloseNavMenu}>
+                                            <Typography textAlign="center">Register</Typography>
+                                        </MenuItem>
+                                    </Link>
                                 </Menu>
                             </Box>}
-                        <Typography
-                            variant="h5"
-                            noWrap
-                            component="a"
-                            href=""
-                            sx={{
-                                mr: 2,
-                                display: { xs: 'flex', md: 'none' },
-                                flexGrow: 1,
-                                fontWeight: 700,
-                                color: 'inherit',
-                                textDecoration: 'none',
-                            }}
-                        >
-                            Micro Social Media
-                        </Typography>
+                        <Link to="/" style={{ textDecoration: "none", color: 'inherit' }}>
+                            <Typography
+                                variant="h5"
+                                noWrap
+                                component="a"
+                                href=""
+                                sx={{
+                                    mr: 8,
+                                    display: { xs: 'flex', md: 'none' },
+                                    flexGrow: 1,
+                                    fontWeight: 700,
+                                    color: 'inherit',
+                                    textDecoration: 'none',
+                                }}
+                            >
+                                Micro Social Media
+                            </Typography>
+                        </Link>
                         {userInfo?.useremail || userEmail ?
                             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', justifyContent: "flex-end" } }}>
                                 <IconButton size="large" aria-label="show 4 new mails" color="inherit">
@@ -146,7 +174,7 @@ const Navbar = ({ open, setOpen }) => {
                                 </IconButton>
                                 <Button
                                     onClick={logout}
-                                    sx={{ my: 2, color: 'white', display: 'block', textTransform: "initial" }}
+                                    sx={{ my: 2, display: { xs: 'none', md: 'flex' }, color: 'white', textTransform: "initial" }}
                                 >
                                     Logout
                                 </Button>
@@ -164,7 +192,7 @@ const Navbar = ({ open, setOpen }) => {
                                         onClick={handleCloseNavMenu}
                                         sx={{ my: 2, color: 'white', display: 'block', textTransform: "initial" }}
                                     >
-                                        login
+                                        Login
                                     </Button>
                                 </Link>
                             </Box>}

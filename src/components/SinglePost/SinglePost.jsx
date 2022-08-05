@@ -93,8 +93,8 @@ const SinglePost = ({ post }) => {
                         </Grid>
                     }
                     {
-                        post?.img && <Grid item xs={12} md={12} lg={12}>
-                            <img src={post?.img} alt="" width={"100%"} />
+                        post?.img && <Grid item xs={12} md={12} lg={12} sx={{ textAlign: "center" }}>
+                            <img src={post?.img} alt="" height={"250px"} />
                         </Grid>
                     }
                     <Grid item xs={12} md={12} lg={12}>

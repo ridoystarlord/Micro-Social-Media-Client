@@ -14,13 +14,14 @@ const Login = ({ open, setOpen }) => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const Login = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
         loginUser(currentUser)
             .then(res => {
                 if (res[0]) {
                     Cookies.set('user', JSON.stringify(res[1].user), { expires: 7 })
                     setCurrentUser(initailLogin)
-                    setOpen({ show: true, type: "success", message: "Login Successfull" });
+                    setOpen({ show: true, type: "success", message: "Login Successfully" });
                     navigate("/", { replace: true })
                     dispatch(setUserLoginDetails({
                         name: res[1]?.user?.name,
@@ -38,50 +39,53 @@ const Login = ({ open, setOpen }) => {
         <MessageAlert open={open} setOpen={setOpen} />
         <Container sx={{ my: 2 }}>
             <Paper elevation={2} sx={{ p: 2 }}>
-                <Grid container spacing={1}>
-                    <Grid item xs={12}>
-                        <TextField
-                            size="small"
-                            onChange={(e) => {
-                                setCurrentUser({ ...currentUser, email: e.target.value })
-                            }}
-                            value={currentUser?.email}
-                            required
-                            type="email"
-                            label="Enter Your Email"
-                            variant="outlined"
-                            fullWidth
-                        />
-                    </Grid>
+                <form onSubmit={handleSubmit}>
+                    <Grid container spacing={1}>
+                        <Grid item xs={12}>
+                            <TextField
+                                size="small"
+                                onChange={(e) => {
+                                    setCurrentUser({ ...currentUser, email: e.target.value })
+                                }}
+                                value={currentUser?.email}
+                                required
+                                type="email"
+                                label="Enter Your Email"
+                                variant="outlined"
+                                fullWidth
+                            />
+                        </Grid>
 
-                    <Grid item xs={12}>
-                        <TextField
-                            size="small"
-                            onChange={(e) => {
-                                setCurrentUser({ ...currentUser, password: e.target.value })
-                            }}
-                            value={currentUser?.password}
-                            required
-                            label="Enter Your Password"
-                            variant="outlined"
-                            fullWidth
-                            type="password"
-                        />
+                        <Grid item xs={12}>
+                            <TextField
+                                size="small"
+                                onChange={(e) => {
+                                    setCurrentUser({ ...currentUser, password: e.target.value })
+                                }}
+                                value={currentUser?.password}
+                                required
+                                label="Enter Your Password"
+                                variant="outlined"
+                                fullWidth
+                                type="password"
+                            />
+                        </Grid>
+                        <Grid item xs={12} sx={{ textAlign: "center" }}>
+                            <Button
+                                type='submit'
+                                variant="contained"
+                                color="primary"
+                                onClick={() => Login()}
+                            >
+                                Login
+                            </Button>
+                        </Grid>
+                        <Grid item xs={12} sx={{ textAlign: "center" }}>
+                            <span>Create An Accout? </span><Link to="/register" style={{ textDecoration: "none" }}>Click here
+                            </Link>
+                        </Grid>
                     </Grid>
-                    <Grid item xs={12} sx={{ textAlign: "center" }}>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={() => Login()}
-                        >
-                            Login
-                        </Button>
-                    </Grid>
-                    <Grid item xs={12} sx={{ textAlign: "center" }}>
-                        <span>Create An Accout? </span><Link to="/register" style={{ textDecoration: "none" }}>Click here
-                        </Link>
-                    </Grid>
-                </Grid>
+                </form>
             </Paper>
         </Container>
     </>
