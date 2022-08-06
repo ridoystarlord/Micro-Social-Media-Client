@@ -103,10 +103,10 @@ const SinglePost = ({ post }) => {
                     <Grid item xs={12} md={12} lg={12}>
                         <Grid container spacing={3}>
                             <Grid item xs={4} sx={{ display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }} onClick={() => addNewUpVoteToPost()}>
-                                <Typography sx={{ mr: "0.5rem" }}>{post?.upvote?.length}</Typography><BiLike />
+                                <Typography sx={{ mr: "0.5rem" }}>{post?.upvote?.length}</Typography><BiLike color={post?.upvote?.find(id => id === userInfo?._id) ? "blue" : "black"} />
                             </Grid>
                             <Grid item xs={4} sx={{ display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }} onClick={() => addNewDownVoteToPost()}>
-                                <Typography sx={{ mr: "0.5rem" }}>{post?.downvote?.length}</Typography><BiDislike />
+                                <Typography sx={{ mr: "0.5rem" }}>{post?.downvote?.length}</Typography><BiDislike color={post?.downvote?.find(id => id === userInfo?._id) ? "blue" : "black"} />
                             </Grid>
                             <Grid item xs={4} sx={{ display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }} onClick={() => setShowComment(!showComment)}>
                                 <Typography sx={{ mr: "0.5rem" }}>{post?.comments?.length}</Typography><BiComment />
